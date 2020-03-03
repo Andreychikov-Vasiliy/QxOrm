@@ -29,6 +29,17 @@
 ##
 #############################################################################
 
+# ENV
+
+#  - a BSON_INCLUDE environment variable to define where bson library source code is located (or a
+QX_BSON_INCLUDE_PATH=/usr/local/Cellar/mongo-c-driver/1.16.2/include/libbson-1.0
+#  - a MONGOC_INCLUDE environment variable to define where mongoc library source code is located (or a
+QX_MONGOC_INCLUDE_PATH=/usr/local/Cellar/mongo-c-driver/1.16.2/include/libmongoc-1.0
+#  - a BSON_LIB environment variable to define where bson library is located (or a
+QX_BSON_LIB_PATH=/usr/local/Cellar/mongo-c-driver/1.16.2/lib
+#  - a MONGOC_LIB environment variable to define where mongoc library is located (or a
+QX_MONGOC_LIB_PATH=/usr/local/Cellar/mongo-c-driver/1.16.2/lib
+
 ###########################################
 # QxOrm library requires a C++11 compiler #
 ###########################################
@@ -186,7 +197,7 @@ DEFINES += _QX_ENABLE_BOOST_SERIALIZATION_XML
 #  - a BSON_LIB environment variable to define where bson library is located (or a QX_BSON_LIB_PATH qmake variable)
 #  - a MONGOC_LIB environment variable to define where mongoc library is located (or a QX_MONGOC_LIB_PATH qmake variable)
 
-# DEFINES += _QX_ENABLE_MONGODB
+DEFINES += _QX_ENABLE_MONGODB
 
 contains(DEFINES, _QX_ENABLE_MONGODB) {
 
