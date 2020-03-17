@@ -14,6 +14,7 @@ template <> void register_class(QxClass<comment> & t)
 
    t.data(& comment::m_text, "comment_text");
    t.data(& comment::m_dt_create, "date_creation");
+   t.data(& comment::m_user_id, "user_id");
 
    t.relationManyToOne(& comment::m_blog, "blog_id");
 }}

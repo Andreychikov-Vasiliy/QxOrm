@@ -24,14 +24,18 @@ TARGET = qxBlogMongoDB
 LIBS += -l"QxOrm"
 } # CONFIG(debug, debug|release)
 
-HEADERS += ./include/precompiled.h
+HEADERS += ./include/precompiled.h \
+    include/blog_quote.h \
+    include/donation.h \
 HEADERS += ./include/export.h
 HEADERS += ./include/author.h
 HEADERS += ./include/blog.h
 HEADERS += ./include/category.h
 HEADERS += ./include/comment.h
 
-SOURCES += ./src/author.cpp
+SOURCES += ./src/author.cpp \
+    src/blog_quote.cpp \
+    src/donation.cpp \
 SOURCES += ./src/blog.cpp
 SOURCES += ./src/category.cpp
 SOURCES += ./src/comment.cpp

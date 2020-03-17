@@ -13,6 +13,7 @@ public:
    QString     m_text;
    QDateTime   m_dt_create;
    blog_ptr    m_blog;
+   int         m_user_id;
 // -- contructor, virtual destructor
    comment() { ; }
    virtual ~comment() { ; }

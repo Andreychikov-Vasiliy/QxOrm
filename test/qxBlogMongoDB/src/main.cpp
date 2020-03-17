@@ -5,6 +5,8 @@
 #include "../include/blog.h"
 #include "../include/author.h"
 #include "../include/comment.h"
+#include "../include/donation.h"
+#include "../include/blog_quote.h"
 #include "../include/category.h"
 
 #include <QxOrm_Impl.h>
@@ -27,8 +29,8 @@ int main(int argc, char * argv[])
    qx::QxSqlDatabase * pDatabase = qx::QxSqlDatabase::getSingleton();
    pDatabase->setDriverName("QXMONGODB");
    pDatabase->setDatabaseName("qxBlog");
-   pDatabase->setHostName("localhost");
-   pDatabase->setPort(27017);
+   pDatabase->setHostName("192.168.99.100");
+   pDatabase->setPort(27020);
    pDatabase->setUserName("");
    pDatabase->setPassword("");
 
@@ -263,14 +265,56 @@ void basicCRUDOnBlog()
 
    comment_1->m_text = "comment_1 text";
    comment_1->m_dt_create = QDateTime::currentDateTime();
+   comment_1->m_user_id = 14;
    comment_1->m_blog = blog_1;
    comment_2->m_text = "comment_2 text";
    comment_2->m_dt_create = QDateTime::currentDateTime();
+   comment_2->m_user_id = 15;
    comment_2->m_blog = blog_1;
 
    daoError = qx::dao::insert(comment_1); qAssert(! daoError.isValid());
    daoError = qx::dao::insert(comment_2); qAssert(! daoError.isValid());
    qAssert(qx::dao::count<comment>() == 2);
+
+   // Add 2 blog_quotes to 'blog_1'
+   blog_quote_ptr blog_quote_1; blog_quote_1.reset(new blog_quote());
+   blog_quote_ptr blog_quote_2; blog_quote_2.reset(new blog_quote());
+
+   blog_quote_1->m_quote_text = "blog_quote_1 text";
+   blog_quote_1->m_quote_start_at = 23;
+   blog_quote_1->m_quote_end_at = 236;
+   blog_quote_1->m_dt_create = QDateTime::currentDateTime();
+   blog_quote_1->m_user_id = 412;
+   blog_quote_1->m_blog = blog_1;
+   blog_quote_2->m_quote_text = "blog_quote_2 text";
+   blog_quote_2->m_quote_start_at = 123;
+   blog_quote_2->m_quote_end_at = 436;
+   blog_quote_2->m_dt_create = QDateTime::currentDateTime();
+   blog_quote_2->m_user_id = 145;
+   blog_quote_2->m_blog = blog_1;
+
+   daoError = qx::dao::insert(blog_quote_1); qAssert(! daoError.isValid());
+   daoError = qx::dao::insert(blog_quote_2); qAssert(! daoError.isValid());
+   qAssert(qx::dao::count<blog_quote>() == 2);
+
+
+   // Add 2 donations to 'blog_1'
+   donation_ptr donation_1; donation_1.reset(new donation());
+   donation_ptr donation_2; donation_2.reset(new donation());
+
+   donation_1->m_donate_amount = 236.32;
+   donation_1->m_dt_create = QDateTime::currentDateTime();
+   donation_1->m_user_id = 45;
+   donation_1->m_blog = blog_1;
+   donation_2->m_donate_amount = 124.14;
+   donation_2->m_dt_create = QDateTime::currentDateTime();
+   donation_2->m_user_id = 673;
+   donation_2->m_blog = blog_1;
+
+   daoError = qx::dao::insert(donation_1); qAssert(! daoError.isValid());
+   daoError = qx::dao::insert(donation_2); qAssert(! daoError.isValid());
+   qAssert(qx::dao::count<donation>() == 2);
+
 
    // Add 2 categories to 'blog_1' => 'list_category' is not defined as relationship in 'blog' class => so all categories are embedded in 'blog' collection (instead of referenced for relationships)
    list_category categories;
