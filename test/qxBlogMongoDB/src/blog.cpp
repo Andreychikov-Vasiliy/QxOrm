@@ -16,5 +16,5 @@ template <> void register_class(QxClass<blog> & t)
    t.data(& blog::m_categoryX, "list_category");
 
    t.relationManyToOne(& blog::m_author, "author_id");
-   t.relationOneToMany(& blog::m_commentX, "list_comment", "blog_id");
+   t.relationOneToMany(& blog::m_reactionX, "list_reaction", "blog_id");
 }}

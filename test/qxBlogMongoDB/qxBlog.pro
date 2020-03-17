@@ -27,6 +27,7 @@ LIBS += -l"QxOrm"
 HEADERS += ./include/precompiled.h \
     include/blog_quote.h \
     include/donation.h \
+    include/reaction.h
 HEADERS += ./include/export.h
 HEADERS += ./include/author.h
 HEADERS += ./include/blog.h
@@ -36,6 +37,7 @@ HEADERS += ./include/comment.h
 SOURCES += ./src/author.cpp \
     src/blog_quote.cpp \
     src/donation.cpp \
+    src/reaction.cpp
 SOURCES += ./src/blog.cpp
 SOURCES += ./src/category.cpp
 SOURCES += ./src/comment.cpp

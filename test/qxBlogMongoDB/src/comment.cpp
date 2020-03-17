@@ -1,7 +1,6 @@
 #include "../include/precompiled.h"
 
 #include "../include/comment.h"
-#include "../include/blog.h"
 
 #include <QxOrm_Impl.h>
 
@@ -10,11 +9,11 @@ QX_REGISTER_CPP_QX_BLOG(comment)
 namespace qx {
 template <> void register_class(QxClass<comment> & t)
 {
-   t.id(& comment::m_id, "comment_id");
+//     t.id(& comment::m_id, "comment_id");
 
-   t.data(& comment::m_text, "comment_text");
-   t.data(& comment::m_dt_create, "date_creation");
-   t.data(& comment::m_user_id, "user_id");
+    t.data(& comment::m_text, "comment_text");
+//   t.data(& comment::m_dt_create, "date_creation");
+//   t.data(& comment::m_user_id, "user_id");
 
-   t.relationManyToOne(& comment::m_blog, "blog_id");
+//   t.relationManyToOne(& comment::m_blog, "blog_id");
 }}

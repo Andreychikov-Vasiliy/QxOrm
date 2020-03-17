@@ -2,7 +2,7 @@
 #define _QX_BLOG_BLOG_H_
 
 #include "author.h"
-#include "comment.h"
+#include "reaction.h"
 #include "category.h"
 
 class QX_BLOG_DLL_EXPORT blog
@@ -13,7 +13,7 @@ public:
    QString        m_text;
    QDateTime      m_dt_creation;
    author_ptr     m_author;
-   list_comment   m_commentX;
+   list_reaction   m_reactionX;
    list_category  m_categoryX;
 // -- contructor, virtual destructor
    blog() { ; }

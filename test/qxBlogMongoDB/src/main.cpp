@@ -342,7 +342,7 @@ void complexQueriesOnBlog()
    blog_tmp->m_id = allBlogs[0]->m_id;
    daoError = qx::dao::fetch_by_id_with_all_relation(blog_tmp); qAssert(! daoError.isValid());
    qx::dump(blog_tmp);
-   qAssert(blog_tmp->m_commentX.count() == 2);
+   qAssert(blog_tmp->m_reactionX.count() == 2);
    qAssert(blog_tmp->m_categoryX.count() == 2);
    qAssert(blog_tmp->m_text == "update blog_text_1");
    qAssert(blog_tmp->m_author && (blog_tmp->m_author->m_id == "my_custom_id_author_2"));
@@ -352,22 +352,22 @@ void complexQueriesOnBlog()
    blog_tmp->m_id = allBlogs[0]->m_id;
    daoError = qx::dao::fetch_by_id_with_relation("*->*->*->*", blog_tmp); qAssert(! daoError.isValid());
    qx::dump(blog_tmp);
-   qAssert(blog_tmp->m_commentX.count() == 2);
+   qAssert(blog_tmp->m_reactionX.count() == 2);
    qAssert(blog_tmp->m_categoryX.count() == 2);
    qAssert(blog_tmp->m_text == "update blog_text_1");
    qAssert(blog_tmp->m_author && blog_tmp->m_author->m_id == "my_custom_id_author_2");
-   qAssert(blog_tmp->m_author->m_blogX[0]->m_commentX.count() > 0);
+   qAssert(blog_tmp->m_author->m_blogX[0]->m_reactionX.count() > 0);
 
    // Fetch blog into a new variable with many relations using "*->*" (2 levels of relationships)
    blog_tmp.reset(new blog());
    blog_tmp->m_id = allBlogs[0]->m_id;
    daoError = qx::dao::fetch_all_with_relation("*->*", blog_tmp); qAssert(! daoError.isValid());
    qx::dump(blog_tmp);
-   qAssert(blog_tmp->m_commentX.count() == 2);
+   qAssert(blog_tmp->m_reactionX.count() == 2);
    qAssert(blog_tmp->m_categoryX.count() == 2);
    qAssert(blog_tmp->m_text == "update blog_text_1");
    qAssert(blog_tmp->m_author && blog_tmp->m_author->m_id == "my_custom_id_author_2");
-   qAssert(blog_tmp->m_author->m_blogX[0]->m_commentX.count() == 0);
+   qAssert(blog_tmp->m_author->m_blogX[0]->m_reactionX.count() == 0);
 
    // Fetch only property 'm_dt_creation' of blog
    QStringList lstColumns = QStringList() << "date_creation";
@@ -387,10 +387,9 @@ void complexQueriesOnBlog()
    qAssert(lstBlogComplexRelation[0]->m_dt_creation.isNull()); // Not fetched
    qAssert(lstBlogComplexRelation[0]->m_author->m_sex == author::unknown); // Not fetched
    qAssert(lstBlogComplexRelation[0]->m_author->m_name != ""); // Fetched
-   qAssert(lstBlogComplexRelation[0]->m_commentX.size() > 0);
-   qAssert(lstBlogComplexRelation[0]->m_commentX[0]->m_dt_create.isNull()); // Not fetched
-   qAssert(lstBlogComplexRelation[0]->m_commentX[0]->m_text != ""); // Fetched
-   qAssert(lstBlogComplexRelation[0]->m_commentX[0]->m_blog);
+   qAssert(lstBlogComplexRelation[0]->m_reactionX.size() > 0);
+   qAssert(lstBlogComplexRelation[0]->m_reactionX[0]->m_dt_create.isNull()); // Not fetched
+   qAssert(lstBlogComplexRelation[0]->m_reactionX[0]->m_blog);
 
    // Fetch relations defining columns to remove before fetching with syntax -{ col_1, col_2, etc... }
    list_blog lstBlogComplexRelation2;
@@ -401,10 +400,9 @@ void complexQueriesOnBlog()
    qAssert(! lstBlogComplexRelation2[0]->m_dt_creation.isNull()); // Fetched
    qAssert(lstBlogComplexRelation2[0]->m_author->m_sex != author::unknown); // Fetched
    qAssert(lstBlogComplexRelation2[0]->m_author->m_name == ""); // Not fetched
-   qAssert(lstBlogComplexRelation2[0]->m_commentX.size() > 0);
-   qAssert(! lstBlogComplexRelation2[0]->m_commentX[0]->m_dt_create.isNull()); // Fetched
-   qAssert(lstBlogComplexRelation2[0]->m_commentX[0]->m_text == ""); // Not fetched
-   qAssert(lstBlogComplexRelation2[0]->m_commentX[0]->m_blog);
+   qAssert(lstBlogComplexRelation2[0]->m_reactionX.size() > 0);
+   qAssert(! lstBlogComplexRelation2[0]->m_reactionX[0]->m_dt_create.isNull()); // Fetched
+   qAssert(lstBlogComplexRelation2[0]->m_reactionX[0]->m_blog);
 
    // Check qx::dao::save_with_relation_recursive() function
    daoError = qx::dao::save_with_relation_recursive(blog_tmp); qAssert(! daoError.isValid());
